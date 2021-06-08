@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Basket
+{%endblock%}
+
+
+{%block content%}
+         
+            <h1>корзина</h1>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Действие</th>
+                    <th scope="col">фото</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">цена</th>
+                    <th scope="col">тип</th>
+                  </tr>
+                </thead>
+                <tbody>
+            {% for i in order %}
+              <tr>
+                <td><a class="nav-link" href="{{url_for('drop_basket', slug = i.slug)}}">Удалить из корзины</a></td>
+                <td><div style = 'width: 150px; height: 150px;' ><img class="card-img-top embed-responsive-item img-fluid" src="{{url_for('static', filename ='images/'+i.namefoto)}}"></div></td>
+                <td>{{i.name}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.tipe}}</td>
+              </tr>
+
+            {%endfor%}
+            </tbody>
+        </table>
+        {% if order%}
+        <a href = "{{url_for('pay_order')}}"><button type="submit" class="btn btn-primary">Оплатить</button></a>
+        {%endif%}
+{%endblock%}

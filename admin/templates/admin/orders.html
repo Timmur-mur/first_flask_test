@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    index
+{%endblock%}
+
+{%block admin%}
+    
+
+{%endblock%}
+
+{%block content%}
+    
+    <div class="container-fluid">
+        <div class = 'row'>
+    {%for order in orders %}
+    
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    {%if order.status%}
+                        <h5 class="card-title">Новый заказ</h5>
+                    {%else%}
+                        <h5 class="card-title">Заказ исполнен</h5>
+                    {%endif%}
+                    <h5 class="card-title">{{order.user.name}}</h5>
+                    <h5 class="card-title">{{order.user.email}}</h5>
+                    <h5 class="card-title">{{order.user.phone}}</h5>
+                    
+                </div>
+                <ul class="list-group list-group-flush">
+                    {%for items in order.items_order%}
+                        <li class="list-group-item">{{items}}</li>
+                    {%endfor%}
+                    
+                </ul>
+                <div class="card-body">
+                    {%if order.status%}
+                        <a href="{{url_for('admin.send_order', order_id = order.id)}}" class="card-link">Отправить</a>
+                    {%endif%}
+                    
+                </div>
+            </div>
+   
+        {%endfor%}
+        </div>
+    </div>
+
+    
+{%endblock%}

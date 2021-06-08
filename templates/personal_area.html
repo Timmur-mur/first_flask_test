@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Личный кабинет
+{%endblock%}
+
+{%block admin%}
+    
+
+{%endblock%}
+
+{%block content%}
+        <h1>{{user.name}}</h1>
+
+        <div class="card">
+            <h5 class="card-header">Регистрационные данные</h5>
+            <div class="card-body">
+              <h5 class="card-title">Имя: {{user.name}}</h5>
+              <h5 class="card-title">mail: {{user.email}}</h5>
+              <h5 class="card-title">Телефон: {{user.phone}}</h5>
+              <a href="{{url_for('edit_user_data', user_id = user.id)}}" class="btn btn-primary">Изменить данные</a>
+            </div>
+          </div>
+
+
+        <h4>История заказов:</h4>  
+        <div class="container-fluid">
+            <div class = 'row'>
+        {%for order in orders%}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                {%if order.status%}
+                    <h5 class="card-title">Исполняется</h5>
+                {%else%}
+                    <h5 class="card-title">Заказ исполнен</h5>
+                {%endif%}
+                
+            </div>
+            <ul class="list-group list-group-flush">
+                {%for items in order.items_order%}
+                    <li class="list-group-item">{{items}}</li>
+                {%endfor%}
+                
+            </ul>
+            <div class="card-body">
+                
+            </div>
+        </div>
+        {%endfor%}
+        </div>
+        </div>
+{%endblock%}
+

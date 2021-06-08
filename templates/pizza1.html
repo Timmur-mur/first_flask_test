@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Pizza
+{%endblock%}
+
+{%block content%}
+<div class="container-fluid">
+    <div class = 'row'>
+      {% for page in pages.get_pages() %}
+                    <div class="col-sm mt-5">
+                        <div class="card" style="width: 18rem;">
+                               <h5 class="card-title"></h5>
+                            <div class = 'embed-responsive embed-responsive-16by9'>
+                                <img class="card-img-top embed-responsive-item" src="{{url_for('static', filename = 'images/'+page.namefoto)}}" alt="Card image cap">
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{page.name}}</p>
+                                <a href="{{url_for('price_detail', slug = page.slug, tip = 'pizza')}}" class="btn btn-primary">Заказать за {{page.price}} руб</a>
+                            </div>
+                        </div>
+                    </div>
+    {%endfor%}
+    </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="./?page={{pages.prev_num()}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+         
+        {%for page in range(1,pages.get_all_pages()+1)%}
+            
+
+            <li class="page-item"><a class="page-link" href="./?page={{page}}">{{page}}</a></li>
+        
+        {%endfor%}
+        <li class="page-item">
+          <a class="page-link" href="./?page={{pages.next_num()}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+
+        </ul>
+      </nav>
+    </div>
+{%endblock%}

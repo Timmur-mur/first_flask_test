@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Регистрация
+{%endblock%}
+
+
+{%block content%}
+
+{% for msg in get_flashed_messages()%}
+<div class = 'flash'>{{msg}}</div>
+{%endfor%}
+
+<div class = col-md-6>
+    <form action = '{{ url_for("registration")}}' method = 'POST' enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{form.name.label(class = 'form-text')}}
+        {{form.name(class = 'form-control')}}
+        {{form.email.label(class = 'form-text')}}
+        {{form.email(class = 'form-control', type = 'email')}}
+        {{form.phone.label(class = 'form-text')}}
+        {{form.phone(class = 'form-control', type = 'tel')}}
+        {{form.password.label(class = 'form-text')}}
+        {{form.password(class = 'form-control')}}
+        {{form.checkbox.label(class = 'checkbox')}}
+        {{form.checkbox(class = 'checkbox')}}
+        <button type="submit" class="btn btn-primary">ОТправить</button>
+    </form>
+</div>
+
+    
+    
+
+
+
+{%endblock%}

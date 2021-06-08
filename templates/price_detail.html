@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Detali
+{%endblock%}
+
+{%block content%}
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <figure class="figure">
+                        <img src="{{url_for('static', filename = 'images/'+detail.namefoto)}}" class="figure-img img-fluid rounded" alt="...">
+                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                    </figure>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h5 class="card-header">{{detail.name}}</h5>
+                        <div class="card-body">
+                            <p class="card-text">{{detail.body|safe}}</p>
+                            {% if session['admin'] == False%}
+                                <a href="{{url_for('basket', slug = detail.slug)}}" class="btn btn-primary">Добавить в корзину</a>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+{%endblock%}

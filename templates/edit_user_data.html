@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    index
+{%endblock%}
+
+{%block admin%}
+    
+
+{%endblock%}
+
+{%block content%}
+<div class = col-md-6>
+    <form action = '{{ url_for("edit_user_data", user_id = user.id)}}' method = 'POST' enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{form.name.label(class = 'form-text')}}
+        {{form.name(class = 'form-control')}}
+        {{form.email.label(class = 'form-text')}}
+        {{form.email(class = 'form-control', type = 'email')}}
+        {{form.phone.label(class = 'form-text')}}
+        {{form.phone(class = 'form-control', type = 'tel')}}
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+</div>
+{%endblock%}
+

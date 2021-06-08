@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    edit
+{%endblock%}
+
+
+{%block content%}
+    <div class = col-md-6>
+        <form action = "{{ url_for( 'admin.edit', slug = eat.slug)}}" method = 'POST' enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{form.name.label(class = 'form-text')}}
+            {{form.name(class = 'form-control')}}
+            {{form.body.label(class = 'form-text')}}
+            {{form.body(class = 'form-control')}}
+            {{form.price.label(class = 'form-text')}}
+            {{form.price(class = 'form-control')}}
+            {{form.tipe.label(class = 'form-text')}}
+            {{form.tipe(class = 'form-control')}}
+            <div style = 'width: 150px; height: 100px;' ><img class="card-img-top embed-responsive-item img-fluid" src="{{url_for('static', filename ='images/'+eat.namefoto)}}"></div>
+            {{form.image.label(class = 'form-text')}}
+            {{form.image(class = 'form-control')}}
+            <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name = 'body') }}
+    </div>
+
+{%endblock%}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Вход
+{%endblock%}
+
+
+{%block content%}
+
+{% for msg in get_flashed_messages()%}
+<div class = 'flash'>{{msg}}</div>
+{%endfor%}
+<div class = col-md-6>
+    <form action = '{{ url_for("enter")}}' method = 'POST' enctype="multipart/form-data">
+        {{ form.csrf_token }}
+       
+        {{form.email.label(class = 'form-text')}}
+        {{form.email(class = 'form-control')}}
+        {{form.password.label(class = 'form-text')}}
+        {{form.password(class = 'form-control')}}
+       
+        <button type="submit" class="btn btn-primary">ОТправить</button>
+    </form>
+        <a href = '{{url_for("registration")}}'><button type="submit" class="btn btn-primary">Регистрация</button></a>
+    
+</div>
+
+
+
+{%endblock%}

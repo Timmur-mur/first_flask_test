@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Admin
+{%endblock%}
+
+{%block admin%}
+    
+
+{%endblock%}
+
+{%block content%}
+         
+            <h1>Admin</h1>
+
+            <a class="nav-link" href="{{url_for('admin.create')}}">ДОбавить блюдо</a>
+            <a class="nav-link" href="{{url_for('admin.create_new')}}">Создать новую запись</a>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Действие</th>
+                    <th scope="col">фото</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">цена</th>
+                    <th scope="col">Описание</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in eat %}
+                  <tr>
+                    <th scope="row">{{i.id}}<a class="nav-link" href="{{url_for('admin.edit', slug = i.slug)}}">Изменить</a> <a href="{{url_for('admin.delit', slug = i.slug)}}">delete</a></th>
+                    <td><div style = 'width: 150px; height: 150px;' ><img class="card-img-top embed-responsive-item img-fluid" src="{{url_for('static', filename ='images/'+i.namefoto)}}"></div></td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.price}}</td>
+                    <td>{{i.body|safe }}</td>
+                  </tr>
+                    {%endfor%}
+                </tbody>
+              </table>
+
+{%endblock%}
